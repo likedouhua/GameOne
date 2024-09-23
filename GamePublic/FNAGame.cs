@@ -5,15 +5,18 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 
-public class FNAGame : Game
+public sealed class FNAGame : Game
 {
+    private static readonly Lazy<FNAGame> lazy = new Lazy<FNAGame>(()=> new FNAGame());
+    public static FNAGame Instance { get { return lazy.Value;}}
+
     private KeyboardState keyboardPrev = new KeyboardState();
     private MouseState mousePrev = new MouseState();
     private GamePadState gpPrev = new GamePadState();
     private SpriteBatch? batch;
     private Texture2D? texture;
 
-    public FNAGame()
+    private FNAGame()
     {
         GraphicsDeviceManager gdm = new GraphicsDeviceManager(this);
 

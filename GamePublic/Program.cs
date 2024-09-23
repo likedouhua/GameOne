@@ -6,7 +6,7 @@ class Program
     [STAThread]
     public static void Main(string[] args)
     {
-        using (FNAGame game = new FNAGame())
+        using (FNAGame game = FNAGame.Instance)
         {
             game.Run();
         }
