@@ -4,6 +4,8 @@ namespace GamePublic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
+using Myra;
+using Myra.Graphics2D.UI;
 
 public sealed class FNAGame : Game
 {
@@ -13,8 +15,9 @@ public sealed class FNAGame : Game
     private KeyboardState keyboardPrev = new KeyboardState();
     private MouseState mousePrev = new MouseState();
     private GamePadState gpPrev = new GamePadState();
-    private SpriteBatch? batch;
-    private Texture2D? texture;
+    // private SpriteBatch? batch;
+    // private Texture2D? texture;
+    private Desktop _desktop;
 
     private FNAGame()
     {
@@ -28,6 +31,8 @@ public sealed class FNAGame : Game
 
         // All content loaded will be in a "Content" folder
         Content.RootDirectory = "Content";
+
+        this.IsMouseVisible = true;
     }
 
     protected override void Initialize()
@@ -42,10 +47,74 @@ public sealed class FNAGame : Game
     {
         // Load textures, sounds, and so on in here...
         // Create the batch...
-        batch = new SpriteBatch(GraphicsDevice);
+        // batch = new SpriteBatch(GraphicsDevice);
 
         // ... then load a texture from ./Content/FNATexture.png
-        texture = Content.Load<Texture2D>("FNATexture");
+        // texture = Content.Load<Texture2D>("FNATexture");
+
+        MyraEnvironment.Game = this;
+
+        var grid = new Grid
+        {
+        RowSpacing = 8,
+        ColumnSpacing = 8
+        };
+
+        grid.ColumnsProportions.Add(new Proportion(ProportionType.Auto));
+        grid.ColumnsProportions.Add(new Proportion(ProportionType.Auto));
+        grid.RowsProportions.Add(new Proportion(ProportionType.Auto));
+        grid.RowsProportions.Add(new Proportion(ProportionType.Auto));
+
+        var helloWorld = new Label
+        {
+        Id = "label",
+        Text = "Hello, World!"
+        };
+        grid.Widgets.Add(helloWorld);
+
+        // ComboBox
+        var combo = new ComboBox();
+        Grid.SetColumn(combo, 1);
+        Grid.SetRow(combo, 0);
+
+        combo.Items.Add(new ListItem("Red", Color.Red));
+        combo.Items.Add(new ListItem("Green", Color.Green));
+        combo.Items.Add(new ListItem("Blue", Color.Blue));
+        grid.Widgets.Add(combo);
+
+        // Button
+        var button = new Button
+        {
+        Content = new Label
+        {
+            Text = "Show"
+        }
+        };
+        Grid.SetColumn(button, 0);
+        Grid.SetRow(button, 1);
+
+        button.Click += (s, a) =>
+        {
+        var messageBox = Dialog.CreateMessageBox("Message", "Some message!");
+        messageBox.ShowModal(_desktop);
+        };
+
+        grid.Widgets.Add(button);
+
+        // Spin button
+        var spinButton = new SpinButton
+        {
+        Width = 100,
+        Nullable = true
+        };
+        Grid.SetColumn(spinButton, 1);
+        Grid.SetRow(spinButton, 1);
+
+        grid.Widgets.Add(spinButton);
+
+        // Add it to the desktop
+        _desktop = new Desktop();
+        _desktop.Root = grid;
 
         base.LoadContent();
     }
@@ -53,8 +122,8 @@ public sealed class FNAGame : Game
     protected override void UnloadContent()
     {
         // Clean up after yourself!
-        batch.Dispose();
-        texture.Dispose();
+        // batch.Dispose();
+        // texture.Dispose();
 
         base.UnloadContent();
     }
@@ -92,12 +161,14 @@ public sealed class FNAGame : Game
     protected override void Draw(GameTime gameTime)
     {
         // Render stuff in here. Do NOT run game logic in here!
-        GraphicsDevice.Clear(Color.CornflowerBlue);
+        GraphicsDevice.Clear(Color.Black);
 
         // Draw the texture to the corner of the screen
-        batch.Begin();
-        batch.Draw(texture, Vector2.Zero, Color.White);
-        batch.End();
+        // batch.Begin();
+        // batch.Draw(texture, Vector2.Zero, Color.White);
+        // batch.End();
+
+        _desktop.Render();
         
         base.Draw(gameTime);
     }

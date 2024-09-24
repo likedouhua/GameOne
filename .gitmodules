@@ -7,3 +7,9 @@
 [submodule "FontStashSharp"]
 	path = FontStashSharp
 	url = https://github.com/FontStashSharp/FontStashSharp.git
+[submodule "XNAssets"]
+	path = XNAssets
+	url = https://github.com/rds1983/XNAssets.git
+[submodule "DdsKtxXna"]
+	path = DdsKtxXna
+	url = https://github.com/rds1983/DdsKtxXna.git

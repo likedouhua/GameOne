@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FNA\FNA.Core.csproj" />
+    <ProjectReference Include="..\Myra\src\Myra\Myra.FNA.Core.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
