@@ -3,9 +3,9 @@
   <Panel Background="#000000FF" >
     <Label Text="GameOne" TextColor="#5BC6FAFF" HorizontalAlignment="Center" />
     <VerticalMenu HorizontalAlignment="Center" VerticalAlignment="Center" LabelHorizontalAlignment="Center" Border="#00000000" Background="#00000000">
-      <MenuItem Text="Start" Id="_menuStart" />
-      <MenuItem Text="Options" Id="_menuOptions" />
-      <MenuItem Text="Quit" Id="_menuQuit" />
+      <MenuItem Text="Start" Id="_menuItemStart" />
+      <MenuItem Text="Options" Id="_menuItemOptions" />
+      <MenuItem Text="Quit" Id="_menuItemQuit" />
     </VerticalMenu>
   </Panel>
 </Project>

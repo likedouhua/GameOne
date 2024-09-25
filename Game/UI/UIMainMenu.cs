@@ -6,6 +6,25 @@ namespace Game.UI
 		public UIMainMenu()
 		{
 			BuildUI();
+
+			_menuItemStart.Selected += (sender, args) => OnClickStart();
+			_menuItemOptions.Selected += (sender, args) => OnClickOptions();
+			_menuItemQuit.Selected += (sender, args) => OnClickQuit();
+		}
+
+		public void OnClickStart()
+		{
+
+		}
+
+		public void OnClickOptions()
+		{
+
+		}
+
+		public void OnClickQuit()
+		{
+			FNAGame.Instance.Exit();
 		}
 	}
 }
